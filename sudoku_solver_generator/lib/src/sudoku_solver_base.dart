@@ -4,7 +4,6 @@ class SudokuSolver {
   int _counter = 0;
 
   SudokuSolver(List<List<int?>> grid) {
-    // TODO: Allow accepting 1D Lists
     _solvedGrid = _replaceNullWithZero(grid);
     _solve(_solvedGrid);
   }

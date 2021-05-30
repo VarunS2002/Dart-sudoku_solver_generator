@@ -2,8 +2,8 @@ import 'package:sudoku_solver_generator/sudoku_solver_generator.dart';
 
 void main() {
   // Solve Example
-  var grid = <List<int>>[
-    [7, 0, 2, 0, 3, 0, 0, 6, 0],
+  var grid = <List<int?>>[
+    [7, null, 2, 0, 3, 0, 0, 6, 0],
     [0, 0, 0, 0, 0, 0, 0, 8, 0],
     [0, 4, 0, 0, 9, 0, 0, 0, 0],
     [0, 6, 7, 0, 1, 9, 0, 0, 5],

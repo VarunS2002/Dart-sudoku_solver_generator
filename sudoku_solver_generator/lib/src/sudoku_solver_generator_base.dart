@@ -3,10 +3,9 @@ class SudokuSolver {
   late List<List<int>> _solvedGrid;
   int _counter = 0;
 
-  SudokuSolver(List<List<int>> grid) {
-    // TODO: Allow Nullable and replace with 0s
+  SudokuSolver(List<List<int?>> grid) {
     // TODO: Allow accepting and returning 1D Lists
-    _solvedGrid = grid;
+    _solvedGrid = _replaceNullWithZero(grid);
     _solve(_solvedGrid);
   }
 
@@ -16,6 +15,16 @@ class SudokuSolver {
 
   int get noOfSolutions {
     return _counter;
+  }
+
+  List<List<int>> _replaceNullWithZero(List<List<int?>> grid) {
+    var notNullGrid = List.generate(9, (i) => List.generate(9, (j) => 0));
+    for (var i = 0; i < 9; i++) {
+      for (var j = 0; j < 9; j++) {
+          notNullGrid[i][j] = grid[i][j] ?? 0;
+      }
+    }
+    return notNullGrid;
   }
 
   List<int>? _findEmpty(List<List<int>> grid) {

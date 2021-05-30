@@ -4,12 +4,24 @@ class SudokuSolver {
   int _counter = 0;
 
   SudokuSolver(List<List<int?>> grid) {
-    // TODO: Allow accepting and returning 1D Lists
+    // TODO: Allow accepting 1D Lists
     _solvedGrid = _replaceNullWithZero(grid);
     _solve(_solvedGrid);
   }
 
-  List<List<int>> get solution {
+  List<int> get solution1D {
+    var solvedGrid1D = List.generate(81, (i) => 0);
+    var index = 0;
+    for (var i = 0; i < 9; i++) {
+      for (var j = 0; j < 9; j++) {
+        solvedGrid1D[index] = _solvedGrid[i][j];
+        index++;
+      }
+    }
+    return solvedGrid1D;
+  }
+
+  List<List<int>> get solution2D {
     return _solvedGrid;
   }
 
@@ -21,7 +33,7 @@ class SudokuSolver {
     var notNullGrid = List.generate(9, (i) => List.generate(9, (j) => 0));
     for (var i = 0; i < 9; i++) {
       for (var j = 0; j < 9; j++) {
-          notNullGrid[i][j] = grid[i][j] ?? 0;
+        notNullGrid[i][j] = grid[i][j] ?? 0;
       }
     }
     return notNullGrid;

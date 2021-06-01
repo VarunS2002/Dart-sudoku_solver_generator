@@ -27,4 +27,11 @@ void main() {
     if (rowNumber % 9 != 0) stdout.write(', ');
     if (rowNumber % 9 == 0) print(']');
   }
+  print('');
+
+  // Generate Example
+  var test = SudokuGenerator(18);
+  SudokuGenerator.printSudoku(test.newSudoku);
+  print('');
+  SudokuGenerator.printSudoku(test.newSudokuSolved);
 }

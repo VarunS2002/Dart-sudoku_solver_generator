@@ -1,41 +1,21 @@
+import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
+
 ///
 class SudokuSolver {
   late List<List<int>> _solvedGrid;
   int _counter = 0;
 
   SudokuSolver(List<List<int?>> grid) {
-    _solvedGrid = _replaceNullWithZero(grid);
+    _solvedGrid = SudokuUtilities.makeNullSafe(grid);
     _solve(_solvedGrid);
   }
 
-  List<int> get solution1D {
-    var solvedGrid1D = List.generate(81, (i) => 0);
-    var index = 0;
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
-        solvedGrid1D[index] = _solvedGrid[i][j];
-        index++;
-      }
-    }
-    return solvedGrid1D;
-  }
-
-  List<List<int>> get solution2D {
+  List<List<int>> get solution {
     return _solvedGrid;
   }
 
   int get noOfSolutions {
     return _counter;
-  }
-
-  List<List<int>> _replaceNullWithZero(List<List<int?>> grid) {
-    var notNullGrid = List.generate(9, (i) => List.generate(9, (j) => 0));
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
-        notNullGrid[i][j] = grid[i][j] ?? 0;
-      }
-    }
-    return notNullGrid;
   }
 
   List<int>? _findEmpty(List<List<int>> grid) {

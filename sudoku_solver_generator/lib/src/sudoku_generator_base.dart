@@ -1,4 +1,5 @@
 import 'package:sudoku_solver_generator/src/sudoku_solver_base.dart';
+import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 
 ///
 class SudokuGenerator {
@@ -14,20 +15,10 @@ class SudokuGenerator {
     _fillValues();
   }
 
-  static List<List<int>> copyGrid(List<List<int>> grid) {
-    var copiedGrid = List.generate(9, (i) => List.generate(9, (j) => 0));
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
-        copiedGrid[i][j] = grid[i][j];
-      }
-    }
-    return copiedGrid;
-  }
-
   void _fillValues() {
     _fillDiagonal();
     _fillRemaining(0, sqrN);
-    matSolved = copyGrid(mat);
+    matSolved = SudokuUtilities.copySudoku(mat);
     _removeKDigits();
   }
 
@@ -138,7 +129,7 @@ class SudokuGenerator {
       }
       var backup = mat[row][col];
       mat[row][col] = 0;
-      var copy = copyGrid(mat);
+      var copy = SudokuUtilities.copySudoku(mat);
       var test = SudokuSolver(copy);
       if (test.noOfSolutions != 1) {
         mat[row][col] = backup;
@@ -153,11 +144,5 @@ class SudokuGenerator {
 
   List<List<int>> get newSudokuSolved {
     return matSolved;
-  }
-
-  static void printSudoku(List<List<int>> mat) {
-    for (var row in mat) {
-      print(row);
-    }
   }
 }

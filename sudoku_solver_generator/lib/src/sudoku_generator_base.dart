@@ -2,47 +2,44 @@ import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 
 ///
 class SudokuGenerator {
-  final int N = 9;
-  final int sqrN = 3;
-  late int K;
-  List<List<int>> mat = List.generate(9, (i) => List.generate(9, (j) => 0));
-  List<List<int>> matSolved =
+  late int emptySquares;
+  List<List<int>> sudoku = List.generate(9, (i) => List.generate(9, (j) => 0));
+  List<List<int>> sudokuSolved =
       List.generate(9, (i) => List.generate(9, (j) => 0));
 
-  SudokuGenerator([int emptySquares = 27]) {
-    K = emptySquares;
+  SudokuGenerator([this.emptySquares = 27]) {
     _fillValues();
   }
 
   void _fillValues() {
     _fillDiagonal();
-    _fillRemaining(0, sqrN);
-    matSolved = SudokuUtilities.copySudoku(mat);
-    _removeKDigits();
+    _fillRemaining(0, 3);
+    sudokuSolved = SudokuUtilities.copySudoku(sudoku);
+    _removeClues();
   }
 
   void _fillDiagonal() {
-    for (var i = 0; i < N; (i = (i + sqrN))) {
+    for (var i = 0; i < 9; (i = (i + 3))) {
       _fillBox(i, i);
     }
   }
 
-  void _fillBox(int row, int col) {
-    int num;
-    for (var i = 0; i < sqrN; i++) {
-      for (var j = 0; j < sqrN; j++) {
+  void _fillBox(int row, int column) {
+    int number;
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
         do {
-          num = _randomGenerator();
-        } while (!_unUsedInBox(row, col, num));
-        mat[row + i][col + j] = num;
+          number = _randomGenerator();
+        } while (!_unUsedInBox(row, column, number));
+        sudoku[row + i][column + j] = number;
       }
     }
   }
 
-  bool _unUsedInBox(int rowStart, int colStart, int num) {
-    for (var i = 0; i < sqrN; i++) {
-      for (var j = 0; j < sqrN; j++) {
-        if (mat[rowStart + i][colStart + j] == num) {
+  bool _unUsedInBox(int rowStart, int columnStart, int number) {
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        if (sudoku[rowStart + i][columnStart + j] == number) {
           return false;
         }
       }
@@ -56,23 +53,23 @@ class SudokuGenerator {
     return numberList[0];
   }
 
-  bool _checkIfSafe(int i, int j, int num) {
-    return (_unUsedInRow(i, num) && _unUsedInCol(j, num)) &&
-        _unUsedInBox(i - (i % sqrN), j - (j % sqrN), num);
+  bool _checkIfSafe(int i, int j, int number) {
+    return (_unUsedInRow(i, number) && _unUsedInColumn(j, number)) &&
+        _unUsedInBox(i - (i % 3), j - (j % 3), number);
   }
 
-  bool _unUsedInRow(int i, int num) {
-    for (var j = 0; j < N; j++) {
-      if (mat[i][j] == num) {
+  bool _unUsedInRow(int i, int number) {
+    for (var j = 0; j < 9; j++) {
+      if (sudoku[i][j] == number) {
         return false;
       }
     }
     return true;
   }
 
-  bool _unUsedInCol(int j, int num) {
-    for (var i = 0; i < N; i++) {
-      if (mat[i][j] == num) {
+  bool _unUsedInColumn(int j, int number) {
+    for (var i = 0; i < 9; i++) {
+      if (sudoku[i][j] == number) {
         return false;
       }
     }
@@ -80,62 +77,62 @@ class SudokuGenerator {
   }
 
   bool _fillRemaining(int i, int j) {
-    if ((j >= N) && (i < (N - 1))) {
+    if ((j >= 9) && (i < (9 - 1))) {
       i = (i + 1);
       j = 0;
     }
-    if ((i >= N) && (j >= N)) {
+    if ((i >= 9) && (j >= 9)) {
       return true;
     }
-    if (i < sqrN) {
-      if (j < sqrN) {
-        j = sqrN;
+    if (i < 3) {
+      if (j < 3) {
+        j = 3;
       }
     } else {
-      if (i < (N - sqrN)) {
-        if (j == ((i ~/ sqrN) * sqrN)) {
-          j = (j + sqrN);
+      if (i < (9 - 3)) {
+        if (j == ((i ~/ 3) * 3)) {
+          j = (j + 3);
         }
       } else {
-        if (j == (N - sqrN)) {
+        if (j == (9 - 3)) {
           i = (i + 1);
           j = 0;
-          if (i >= N) {
+          if (i >= 9) {
             return true;
           }
         }
       }
     }
-    for (var num = 1; num <= N; num++) {
-      if (_checkIfSafe(i, j, num)) {
-        mat[i][j] = num;
+    for (var number = 1; number <= 9; number++) {
+      if (_checkIfSafe(i, j, number)) {
+        sudoku[i][j] = number;
         if (_fillRemaining(i, j + 1)) {
           return true;
         }
-        mat[i][j] = 0;
+        sudoku[i][j] = 0;
       }
     }
     return false;
   }
 
-  void _removeKDigits() {
-    while (K > 0) {
+  void _removeClues() {
+    while (emptySquares > 0) {
       var row = _randomGenerator() - 1;
-      var col = _randomGenerator() - 1;
-      while (mat[row][col] == 0) {
+      var column = _randomGenerator() - 1;
+      while (sudoku[row][column] == 0) {
         row = _randomGenerator() - 1;
-        col = _randomGenerator() - 1;
+        column = _randomGenerator() - 1;
       }
-      mat[row][col] = 0;
-      K--;
+      sudoku[row][column] = 0;
+      emptySquares--;
     }
   }
 
   List<List<int>> get newSudoku {
-    return mat;
+    return sudoku;
   }
 
   List<List<int>> get newSudokuSolved {
-    return matSolved;
+    return sudokuSolved;
   }
 }

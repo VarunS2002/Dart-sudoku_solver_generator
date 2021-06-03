@@ -1,7 +1,24 @@
 import 'package:sudoku_solver_generator/src/sudoku_exceptions_base.dart';
 
+/// Provides various functions related to using the Sudoku Solver and Generator classes or handling the Sudoku puzzles.
 ///
+/// Utility class which shouldn't be instantiated.
 class SudokuUtilities {
+  /// Prints the [sudoku] in a readable format to standard output.
+  ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
+  /// Example Format:
+  /// ```
+  /// [7, 6, 4, 1, 2, 3, 8, 5, 9]
+  /// [8, 5, 9, 6, 4, 7, 3, 1, 2]
+  /// [2, 1, 3, 5, 8, 9, 6, 4, 7]
+  /// [5, 2, 6, 4, 3, 1, 9, 7, 8]
+  /// [9, 4, 1, 8, 7, 2, 5, 6, 3]
+  /// [3, 7, 8, 9, 5, 6, 4, 2, 1]
+  /// [1, 9, 7, 3, 6, 4, 2, 8, 5]
+  /// [4, 8, 2, 7, 9, 5, 1, 3, 6]
+  /// [6, 3, 5, 2, 1, 8, 7, 9, 4]
+  /// ```
   static void printSudoku(List<List<int>> sudoku) {
     if (!isValidConfiguration(sudoku)) {
       throw InvalidSudokuConfigurationException();
@@ -11,6 +28,9 @@ class SudokuUtilities {
     }
   }
 
+  /// Returns an identical copy of the provided [sudoku].
+  ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static List<List<int>> copySudoku(List<List<int>> sudoku) {
     if (!isValidConfiguration(sudoku)) {
       throw InvalidSudokuConfigurationException();
@@ -24,6 +44,11 @@ class SudokuUtilities {
     return copiedSudoku;
   }
 
+  /// Returns a null safe copy of provided [sudoku] to make it usable.
+  ///
+  /// Replaces `null` with `0` in the [sudoku].
+  ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static List<List<int>> makeNullSafe(List<List<int?>> sudoku) {
     var nullSafeSudoku = List.generate(9, (i) => List.generate(9, (j) => 0));
     try {
@@ -41,6 +66,9 @@ class SudokuUtilities {
     return nullSafeSudoku;
   }
 
+  /// Returns a copy of the provided [sudoku] as a 1 Dimensional [List].
+  ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static List<int> to1D(List<List<int>> sudoku) {
     if (!isValidConfiguration(sudoku)) {
       throw InvalidSudokuConfigurationException();
@@ -56,6 +84,9 @@ class SudokuUtilities {
     return sudoku1D;
   }
 
+  /// Returns a copy of the provided [sudoku] as a 2 Dimensional [List] which is the standard format.
+  ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static List<List<int>> to2D(List<int> sudoku) {
     var sudoku2D = List.generate(9, (i) => List.generate(9, (j) => 0));
     var index = 0;
@@ -71,6 +102,17 @@ class SudokuUtilities {
     return sudoku2D;
   }
 
+  /// Returns `true` if the configuration of the [sudoku] follows the rules of Sudoku.
+  ///
+  /// Conditions:
+  /// * [List] of 9 [List]s of 9 [int]s
+  /// * Every row must have the numbers 1-9 without repetition
+  /// * Every column must have the numbers 1-9 without repetition
+  /// * Every 3x3 box must have the number 1-9 without repetition
+  /// * Only positions of non-zero and non-null values are considered
+  /// * Solvability of the puzzle is not considered
+  ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static bool isValidConfiguration(List<List<int?>> sudoku) {
     bool notInRow(List<List<int?>> sudoku, int rowNumber) {
       var numberSet = <int>{};
@@ -134,6 +176,9 @@ class SudokuUtilities {
     return true;
   }
 
+  /// Returns `true` if the configuration of the [sudoku] is valid and there are no `0`s/empty squares.
+  ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static bool isSolved(List<List<int>> sudoku) {
     if (!isValidConfiguration(sudoku)) {
       throw InvalidSudokuConfigurationException();

@@ -1,12 +1,20 @@
+import 'package:sudoku_solver_generator/src/sudoku_exceptions_base.dart';
+
 ///
 class SudokuUtilities {
   static void printSudoku(List<List<int>> sudoku) {
+    if (!isValidConfiguration(sudoku)) {
+      throw InvalidSudokuConfigurationException();
+    }
     for (var row in sudoku) {
       print(row);
     }
   }
 
   static List<List<int>> copySudoku(List<List<int>> sudoku) {
+    if (!isValidConfiguration(sudoku)) {
+      throw InvalidSudokuConfigurationException();
+    }
     var copiedSudoku = List.generate(9, (i) => List.generate(9, (j) => 0));
     for (var i = 0; i < 9; i++) {
       for (var j = 0; j < 9; j++) {
@@ -23,10 +31,16 @@ class SudokuUtilities {
         nullSafeSudoku[i][j] = sudoku[i][j] ?? 0;
       }
     }
+    if (!isValidConfiguration(nullSafeSudoku)) {
+      throw InvalidSudokuConfigurationException();
+    }
     return nullSafeSudoku;
   }
 
   static List<int> to1D(List<List<int>> sudoku) {
+    if (!isValidConfiguration(sudoku)) {
+      throw InvalidSudokuConfigurationException();
+    }
     var sudoku1D = List.generate(81, (i) => 0);
     var index = 0;
     for (var i = 0; i < 9; i++) {
@@ -46,6 +60,9 @@ class SudokuUtilities {
         sudoku2D[i][j] = sudoku[index];
         index++;
       }
+    }
+    if (!isValidConfiguration(sudoku2D)) {
+      throw InvalidSudokuConfigurationException();
     }
     return sudoku2D;
   }

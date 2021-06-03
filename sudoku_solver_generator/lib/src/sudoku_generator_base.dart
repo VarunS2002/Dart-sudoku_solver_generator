@@ -15,13 +15,9 @@ class SudokuGenerator {
     _fillValues();
   }
 
-  List<List<int>> get newSudoku {
-    return _sudoku;
-  }
+  List<List<int>> get newSudoku => _sudoku;
 
-  List<List<int>> get newSudokuSolved {
-    return _sudokuSolved;
-  }
+  List<List<int>> get newSudokuSolved => _sudokuSolved;
 
   void _fillValues() {
     _fillDiagonal();

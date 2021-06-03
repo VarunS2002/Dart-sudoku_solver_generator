@@ -123,4 +123,16 @@ class SudokuUtilities {
     }
     return true;
   }
+
+  static bool isSolved(List<List<int>> sudoku) {
+    if (!isValidConfiguration(sudoku)) {
+      throw InvalidSudokuConfigurationException();
+    }
+    for (var i = 0; i < 9; i++) {
+      if (sudoku[i].contains(0)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

@@ -26,10 +26,14 @@ class SudokuUtilities {
 
   static List<List<int>> makeNullSafe(List<List<int?>> sudoku) {
     var nullSafeSudoku = List.generate(9, (i) => List.generate(9, (j) => 0));
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
-        nullSafeSudoku[i][j] = sudoku[i][j] ?? 0;
+    try {
+      for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+          nullSafeSudoku[i][j] = sudoku[i][j] ?? 0;
+        }
       }
+    } on RangeError {
+      throw InvalidSudokuConfigurationException();
     }
     if (!isValidConfiguration(nullSafeSudoku)) {
       throw InvalidSudokuConfigurationException();
@@ -114,12 +118,16 @@ class SudokuUtilities {
               columnNumber - columnNumber % 3);
     }
 
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
-        if (!isValid(sudoku, i, j)) {
-          return false;
+    try {
+      for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+          if (!isValid(sudoku, i, j)) {
+            return false;
+          }
         }
       }
+    } on RangeError {
+      return false;
     }
     return true;
   }

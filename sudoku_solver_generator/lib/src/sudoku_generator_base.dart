@@ -1,4 +1,3 @@
-import 'package:sudoku_solver_generator/src/sudoku_solver_base.dart';
 import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 
 ///
@@ -127,13 +126,7 @@ class SudokuGenerator {
         row = _randomGenerator() - 1;
         col = _randomGenerator() - 1;
       }
-      var backup = mat[row][col];
       mat[row][col] = 0;
-      var copy = SudokuUtilities.copySudoku(mat);
-      var test = SudokuSolver(copy);
-      if (test.noOfSolutions != 1) {
-        mat[row][col] = backup;
-      }
       K--;
     }
   }

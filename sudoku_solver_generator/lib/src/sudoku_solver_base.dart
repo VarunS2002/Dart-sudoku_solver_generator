@@ -2,26 +2,16 @@ import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 
 ///
 class SudokuSolver {
-  late List<List<int>> _solvedGrid;
-  int _counter = 0;
-
-  SudokuSolver(List<List<int?>> grid) {
-    _solvedGrid = SudokuUtilities.makeNullSafe(grid);
-    _solve(_solvedGrid);
-  }
-
-  List<List<int>> get solution {
+  List<List<int>> solve(List<List<int?>> sudoku) {
+    var _solvedGrid = SudokuUtilities.makeNullSafe(sudoku);
+    _solveImplementation(_solvedGrid);
     return _solvedGrid;
   }
 
-  int get noOfSolutions {
-    return _counter;
-  }
-
-  List<int>? _findEmpty(List<List<int>> grid) {
+  List<int>? _findEmpty(List<List<int>> sudoku) {
     for (var i = 0; i < 9; i++) {
       for (var j = 0; j < 9; j++) {
-        if (grid[i][j] == 0) {
+        if (sudoku[i][j] == 0) {
           return [i, j];
         }
       }
@@ -29,22 +19,22 @@ class SudokuSolver {
     return null;
   }
 
-  bool _valid(List<List<int>> grid, int num, List<int> pos) {
+  bool _valid(List<List<int>> sudoku, int number, List<int> position) {
     for (var i = 0; i < 9; i++) {
-      if (grid[pos[0]][i] == num && pos[1] != i) {
+      if (sudoku[position[0]][i] == number && position[1] != i) {
         return false;
       }
     }
     for (var i = 0; i < 9; i++) {
-      if (grid[i][pos[1]] == num && pos[0] != i) {
+      if (sudoku[i][position[1]] == number && position[0] != i) {
         return false;
       }
     }
-    var boxX = pos[1] ~/ 3;
-    var boxY = pos[0] ~/ 3;
+    var boxX = position[1] ~/ 3;
+    var boxY = position[0] ~/ 3;
     for (var i = boxY * 3; i < boxY * 3 + 3; i++) {
       for (var j = boxX * 3; j < boxX * 3 + 3; j++) {
-        if (grid[i][j] == num && [i, j] != pos) {
+        if (sudoku[i][j] == number && [i, j] != position) {
           return false;
         }
       }
@@ -52,23 +42,22 @@ class SudokuSolver {
     return true;
   }
 
-  bool _solve(List<List<int>> grid) {
+  bool _solveImplementation(List<List<int>> sudoku) {
     int row;
-    int col;
-    if (_findEmpty(grid) == null) {
-      _counter++;
+    int column;
+    if (_findEmpty(sudoku) == null) {
       return true;
     } else {
-      row = _findEmpty(grid)![0];
-      col = _findEmpty(grid)![1];
+      row = _findEmpty(sudoku)![0];
+      column = _findEmpty(sudoku)![1];
     }
     for (var i = 1; i < 10; i++) {
-      if (_valid(grid, i, [row, col])) {
-        grid[row][col] = i;
-        if (_solve(grid)) {
+      if (_valid(sudoku, i, [row, column])) {
+        sudoku[row][column] = i;
+        if (_solveImplementation(sudoku)) {
           return true;
         }
-        grid[row][col] = 0;
+        sudoku[row][column] = 0;
       }
     }
     return false;

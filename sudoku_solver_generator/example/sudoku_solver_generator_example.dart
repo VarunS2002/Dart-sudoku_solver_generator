@@ -13,12 +13,12 @@ void main() {
     [0, 9, 4, 7, 2, 3, 8, 1, 5],
     [7, 2, 1, 0, 5, 0, 0, 0, 4],
   ];
-  var sudokuSolver = SudokuSolver(sudoku);
-  SudokuUtilities.printSudoku(sudokuSolver.solution);
+  var sudokuSolved = SudokuSolver().solve(sudoku);
+  SudokuUtilities.printSudoku(sudokuSolved);
   print('');
 
   // Generate Example
-  var sudokuGenerator = SudokuGenerator(18);
+  var sudokuGenerator = SudokuGenerator(54);
   SudokuUtilities.printSudoku(sudokuGenerator.newSudoku);
   print('');
   SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved);

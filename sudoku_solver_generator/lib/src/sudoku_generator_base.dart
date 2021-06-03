@@ -1,20 +1,32 @@
+import 'package:sudoku_solver_generator/src/sudoku_exceptions_base.dart';
 import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 
 ///
 class SudokuGenerator {
-  late int emptySquares;
-  List<List<int>> sudoku = List.generate(9, (i) => List.generate(9, (j) => 0));
-  List<List<int>> sudokuSolved =
-      List.generate(9, (i) => List.generate(9, (j) => 0));
+  late int _emptySquares;
+  late List<List<int>> _sudoku;
+  late List<List<int>> _sudokuSolved;
 
-  SudokuGenerator([this.emptySquares = 27]) {
+  SudokuGenerator([this._emptySquares = 27]) {
+    if (_emptySquares < 1 || _emptySquares > 81) {
+      throw InvalidEmptySquaresException();
+    }
+    _sudoku = List.generate(9, (i) => List.generate(9, (j) => 0));
     _fillValues();
+  }
+
+  List<List<int>> get newSudoku {
+    return _sudoku;
+  }
+
+  List<List<int>> get newSudokuSolved {
+    return _sudokuSolved;
   }
 
   void _fillValues() {
     _fillDiagonal();
     _fillRemaining(0, 3);
-    sudokuSolved = SudokuUtilities.copySudoku(sudoku);
+    _sudokuSolved = SudokuUtilities.copySudoku(_sudoku);
     _removeClues();
   }
 
@@ -31,7 +43,7 @@ class SudokuGenerator {
         do {
           number = _randomGenerator();
         } while (!_unUsedInBox(row, column, number));
-        sudoku[row + i][column + j] = number;
+        _sudoku[row + i][column + j] = number;
       }
     }
   }
@@ -39,7 +51,7 @@ class SudokuGenerator {
   bool _unUsedInBox(int rowStart, int columnStart, int number) {
     for (var i = 0; i < 3; i++) {
       for (var j = 0; j < 3; j++) {
-        if (sudoku[rowStart + i][columnStart + j] == number) {
+        if (_sudoku[rowStart + i][columnStart + j] == number) {
           return false;
         }
       }
@@ -60,7 +72,7 @@ class SudokuGenerator {
 
   bool _unUsedInRow(int i, int number) {
     for (var j = 0; j < 9; j++) {
-      if (sudoku[i][j] == number) {
+      if (_sudoku[i][j] == number) {
         return false;
       }
     }
@@ -69,7 +81,7 @@ class SudokuGenerator {
 
   bool _unUsedInColumn(int j, int number) {
     for (var i = 0; i < 9; i++) {
-      if (sudoku[i][j] == number) {
+      if (_sudoku[i][j] == number) {
         return false;
       }
     }
@@ -105,34 +117,26 @@ class SudokuGenerator {
     }
     for (var number = 1; number <= 9; number++) {
       if (_checkIfSafe(i, j, number)) {
-        sudoku[i][j] = number;
+        _sudoku[i][j] = number;
         if (_fillRemaining(i, j + 1)) {
           return true;
         }
-        sudoku[i][j] = 0;
+        _sudoku[i][j] = 0;
       }
     }
     return false;
   }
 
   void _removeClues() {
-    while (emptySquares > 0) {
+    while (_emptySquares > 0) {
       var row = _randomGenerator() - 1;
       var column = _randomGenerator() - 1;
-      while (sudoku[row][column] == 0) {
+      while (_sudoku[row][column] == 0) {
         row = _randomGenerator() - 1;
         column = _randomGenerator() - 1;
       }
-      sudoku[row][column] = 0;
-      emptySquares--;
+      _sudoku[row][column] = 0;
+      _emptySquares--;
     }
-  }
-
-  List<List<int>> get newSudoku {
-    return sudoku;
-  }
-
-  List<List<int>> get newSudokuSolved {
-    return sudokuSolved;
   }
 }

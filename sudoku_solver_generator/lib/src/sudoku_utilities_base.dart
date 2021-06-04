@@ -111,8 +111,6 @@ class SudokuUtilities {
   /// * Every 3x3 box must have the number 1-9 without repetition
   /// * Only positions of non-zero and non-null values are considered
   /// * Solvability of the puzzle is not considered
-  ///
-  /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static bool isValidConfiguration(List<List<int?>> sudoku) {
     bool notInRow(List<List<int?>> sudoku, int rowNumber) {
       var numberSet = <int>{};

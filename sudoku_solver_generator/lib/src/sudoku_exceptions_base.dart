@@ -1,4 +1,5 @@
 /// Thrown when the configuration of the Sudoku is not valid.
+///
 /// Configuration of the Sudoku follows the rules of Sudoku.
 ///
 /// Conditions:
@@ -18,6 +19,9 @@ class InvalidSudokuConfigurationException implements Exception {
   String toString() => 'InvalidSudokuConfigurationException';
 }
 
+/// Thrown when the value of the [emptySquares] parameter of [SudokuGenerator] is invalid.
+///
+/// Valid values: Any integer from 1-81 (inclusive).
 class InvalidEmptySquaresException implements Exception {
   String errorMessage() =>
       'The number of empty squares cannot be less than 1 or more than 81.';

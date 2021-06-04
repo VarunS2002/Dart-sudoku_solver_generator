@@ -176,6 +176,9 @@ class SudokuUtilities {
 
   /// Returns `true` if the configuration of the [sudoku] is valid and there are no `0`s/empty squares.
   ///
+  /// Recommended to use this to check if a game is solved instead of comparing with a solved sudoku.
+  /// This is to prevent false-negatives when a puzzle has more than one solution.
+  ///
   /// [InvalidSudokuConfigurationException] is thrown if the configuration of the [sudoku] is not valid.
   static bool isSolved(List<List<int>> sudoku) {
     if (!isValidConfiguration(sudoku)) {

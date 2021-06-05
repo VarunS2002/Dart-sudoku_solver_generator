@@ -2,13 +2,13 @@ import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 
 ///
 class SudokuSolver {
-  List<List<int>> solve(List<List<int?>> sudoku) {
+  static List<List<int>> solve(List<List<int?>> sudoku) {
     var _solvedGrid = SudokuUtilities.makeNullSafe(sudoku);
     _solveImplementation(_solvedGrid);
     return _solvedGrid;
   }
 
-  List<int>? _findEmpty(List<List<int>> sudoku) {
+  static List<int>? _findEmpty(List<List<int>> sudoku) {
     for (var i = 0; i < 9; i++) {
       for (var j = 0; j < 9; j++) {
         if (sudoku[i][j] == 0) {
@@ -19,7 +19,7 @@ class SudokuSolver {
     return null;
   }
 
-  bool _valid(List<List<int>> sudoku, int number, List<int> position) {
+  static bool _valid(List<List<int>> sudoku, int number, List<int> position) {
     for (var i = 0; i < 9; i++) {
       if (sudoku[position[0]][i] == number && position[1] != i) {
         return false;
@@ -42,7 +42,7 @@ class SudokuSolver {
     return true;
   }
 
-  bool _solveImplementation(List<List<int>> sudoku) {
+  static bool _solveImplementation(List<List<int>> sudoku) {
     int row;
     int column;
     if (_findEmpty(sudoku) == null) {

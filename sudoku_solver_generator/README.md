@@ -21,7 +21,7 @@ main() {
     [0, 9, 4, 7, 2, 3, 8, 1, 5],
     [7, 2, 1, 0, 5, 0, 0, 0, 4],
   ];
-  var sudokuSolved = SudokuSolver().solve(sudoku);
+  var sudokuSolved = SudokuSolver.solve(sudoku);
   SudokuUtilities.printSudoku(sudokuSolved);
 }
 ```

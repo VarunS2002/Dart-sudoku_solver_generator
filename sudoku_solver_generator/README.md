@@ -2,7 +2,7 @@
 
 A Dart library to generate and/or solve Sudoku puzzles.
 
-> ![Latest_Release](https://img.shields.io/pub/v/sudoku_solver_generator)
+> [![Latest_Release](https://img.shields.io/pub/v/sudoku_solver_generator)](https://pub.dev/packages/sudoku_solver_generator)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## [Changelog](https://github.com/VarunS2002/Dart-sudoku_solver_generator/blob/main/sudoku_solver_generator/CHANGELOG.md)

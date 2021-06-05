@@ -1,12 +1,28 @@
 import 'package:sudoku_solver_generator/src/sudoku_exceptions_base.dart';
 import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 
+/// Provides the functionality of generating Sudoku puzzles.
 ///
+/// This class has to be instantiated for every new puzzle.
 class SudokuGenerator {
   late int _emptySquares;
   late List<List<int>> _sudoku;
   late List<List<int>> _sudokuSolved;
 
+  /// Constructor to generate the Sudoku. Use the getter methods to retrieve the puzzle.
+  ///
+  /// [_emptySquares] specifies how many boxes should be left empty in the unsolved puzzle. Clues will be 81-[_emptySquares].
+  /// Defaults to 27.
+  /// Higher difficulty is indicated by more [_emptySquares].
+  ///
+  /// Suggested values for various difficulty levels:
+  /// * Beginner - 18
+  /// * Easy - 27
+  /// * Medium - 36
+  /// * Hard - 54
+  ///
+  /// [InvalidEmptySquaresException] is thrown if the value of [_emptySquares] is invalid.
+  /// Valid values: Any integer from 1-81 (inclusive).
   SudokuGenerator([this._emptySquares = 27]) {
     if (_emptySquares < 1 || _emptySquares > 81) {
       throw InvalidEmptySquaresException();
@@ -15,8 +31,13 @@ class SudokuGenerator {
     _fillValues();
   }
 
+  /// Unsolved Sudoku with the specified [_emptySquares].
   List<List<int>> get newSudoku => _sudoku;
 
+  /// 1 possible solution of the unsolved Sudoku.
+  ///
+  /// Use [SudokuUtilities.isSolved()] instead of this to check if a game is solved instead of comparing with this.
+  /// This is to prevent false-negatives when a puzzle has more than one solution.
   List<List<int>> get newSudokuSolved => _sudokuSolved;
 
   void _fillValues() {

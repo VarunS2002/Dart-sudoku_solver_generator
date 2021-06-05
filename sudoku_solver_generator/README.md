@@ -4,7 +4,7 @@ A Dart library to generate and/or solve Sudoku puzzles.
 
 ## Usage
 
-A Sudoku Solver usage example:
+> A Sudoku Solver usage example:
 
 ```dart
 import 'package:sudoku_solver_generator/sudoku_solver_generator.dart';
@@ -26,7 +26,7 @@ main() {
 }
 ```
 
-A Sudoku Generator usage example:
+> A Sudoku Generator usage example:
 
 ```dart
 import 'package:sudoku_solver_generator/sudoku_solver_generator.dart';
@@ -38,3 +38,32 @@ main() {
   SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved);
 }
 ```
+
+## Features
+
+- Generate Sudoku puzzles with your specified number of empty squares or clues.
+
+- Solve Sudoku puzzles of any difficulty instantly.
+
+- Check if the Sudoku puzzle (unsolved or solved) is valid in terms of game rules.
+
+- Check if the Sudoku puzzle has been solved properly.
+
+- Convert the Data Structure of the Sudoku puzzle from 2D List to 1D List and vice-versa.
+
+- Print Sudoku puzzles to the console in an easy-to-read manner.
+
+## Note
+
+- > **Known Issue:** Sudoku Generator may generate puzzles with more than 1 solution. More likely when there are more empty squares.
+
+- Referred Algorithms:
+
+    - [Sudoku Generation Algorithm](https://www.geeksforgeeks.org/program-sudoku-generator/) in Java
+
+    - [Sudoku Generation and Solving Algorithm](https://www.101computing.net/sudoku-generator-algorithm/) in Python
+
+    - [Sudoku Validation](https://www.geeksforgeeks.org/check-if-given-sudoku-board-configuration-is-valid-or-not/) in
+      Python
+
+- If you face any issue or have suggestions then feel free to open an issue on GitHub.

@@ -23,6 +23,7 @@ class SudokuGenerator {
   ///
   /// [InvalidEmptySquaresException] is thrown if the value of [_emptySquares] is invalid.
   /// Valid values: Any integer from 1-81 (inclusive).
+  /// (Known Issue - May generate puzzles with more than 1 solution. More likely with high [_emptySquares]).
   SudokuGenerator([this._emptySquares = 27]) {
     if (_emptySquares < 1 || _emptySquares > 81) {
       throw InvalidEmptySquaresException();

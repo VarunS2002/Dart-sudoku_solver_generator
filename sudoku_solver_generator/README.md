@@ -2,9 +2,19 @@
 
 A Dart library to generate and/or solve Sudoku puzzles.
 
+> ![Latest_Release](https://img.shields.io/pub/v/sudoku_solver_generator)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+## [Changelog](https://github.com/VarunS2002/Dart-sudoku_solver_generator/blob/main/sudoku_solver_generator/CHANGELOG.md)
+
 ## Usage
 
-> A Sudoku Solver usage example:
+```yaml
+dependencies:
+  sudoku_solver_generator: ^1.0.0
+```
+
+A Sudoku Solver usage example:
 
 ```dart
 import 'package:sudoku_solver_generator/sudoku_solver_generator.dart';
@@ -26,7 +36,7 @@ main() {
 }
 ```
 
-> A Sudoku Generator usage example:
+A Sudoku Generator usage example:
 
 ```dart
 import 'package:sudoku_solver_generator/sudoku_solver_generator.dart';
@@ -52,6 +62,8 @@ main() {
 - Convert the Data Structure of the Sudoku puzzle from 2D List to 1D List and vice-versa.
 
 - Print Sudoku puzzles to the console in an easy-to-read manner.
+
+- Well documented client code.
 
 ## Note
 

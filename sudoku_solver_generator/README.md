@@ -49,6 +49,10 @@ main() {
 }
 ```
 
+<br>
+
+> ### Sudoku game based on this package: [Flutter-Sudoku](https://github.com/VarunS2002/Flutter-Sudoku/)
+
 ## Features
 
 - Generate Sudoku puzzles with your specified number of empty squares or clues.

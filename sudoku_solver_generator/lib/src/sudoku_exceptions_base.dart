@@ -10,8 +10,10 @@
 /// * Only positions of non-zero and non-null values are considered
 /// * Solvability of the puzzle is not considered
 ///
-/// [SudokuUtilities.isValidConfiguration()] can be used to check for validity to prevent this Exception.
+/// [SudokuUtilities.isValidConfiguration()] can be used to check for validity
+/// to prevent this Exception.
 class InvalidSudokuConfigurationException implements Exception {
+  /// Returns the error message
   String errorMessage() =>
       'The configuration for the Sudoku puzzle is invalid.';
 
@@ -19,10 +21,12 @@ class InvalidSudokuConfigurationException implements Exception {
   String toString() => 'InvalidSudokuConfigurationException';
 }
 
-/// Thrown when the value of the [emptySquares] parameter of [SudokuGenerator] is invalid.
+/// Thrown when the value of the [emptySquares] parameter of [SudokuGenerator]
+/// is invalid.
 ///
 /// Valid values: Any integer from 1-81 (inclusive).
 class InvalidEmptySquaresException implements Exception {
+  /// Returns the error message
   String errorMessage() =>
       'The number of empty squares cannot be less than 1 or more than 81.';
 

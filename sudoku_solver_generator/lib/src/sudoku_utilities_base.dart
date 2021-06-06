@@ -166,6 +166,18 @@ class SudokuUtilities {
         notInBox(
             sudoku, rowNumber - rowNumber % 3, columnNumber - columnNumber % 3);
 
+    bool containsValidValues(List<List<int?>> sudoku) {
+      var validValueSet = <int?>{1, 2, 3, 4, 5, 6, 7, 8, 9, 0, null};
+      for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+          if (!validValueSet.contains(sudoku[i][j])) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+
     try {
       for (var i = 0; i < 9; i++) {
         for (var j = 0; j < 9; j++) {
@@ -175,6 +187,10 @@ class SudokuUtilities {
         }
       }
     } on RangeError {
+      return false;
+    }
+
+    if (!containsValidValues(sudoku)) {
       return false;
     }
     return true;

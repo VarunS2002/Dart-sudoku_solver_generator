@@ -5,13 +5,11 @@ import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 ///
 /// This class has to be instantiated for every new puzzle.
 class SudokuGenerator {
-  late int _emptySquares;
-  late List<List<int>> _sudoku;
-  late List<List<int>> _sudokuSolved;
-
-  /// Constructor to generate the Sudoku. Use the getter methods to retrieve the puzzle.
+  /// Constructor to generate the Sudoku. Use the getter methods to retrieve
+  /// the puzzle.
   ///
-  /// [_emptySquares] specifies how many boxes should be left empty in the unsolved puzzle. Clues will be 81-[_emptySquares].
+  /// [_emptySquares] specifies how many boxes should be left empty in the
+  /// unsolved puzzle. Clues will be 81-[_emptySquares].
   /// Defaults to 27.
   /// Higher difficulty is indicated by more [_emptySquares].
   ///
@@ -21,9 +19,11 @@ class SudokuGenerator {
   /// * Medium - 36
   /// * Hard - 54
   ///
-  /// [InvalidEmptySquaresException] is thrown if the value of [_emptySquares] is invalid.
+  /// [InvalidEmptySquaresException] is thrown if the value of [_emptySquares]
+  /// is invalid.
   /// Valid values: Any integer from 1-81 (inclusive).
-  /// (Known Issue - May generate puzzles with more than 1 solution. More likely with high [_emptySquares]).
+  /// (Known Issue - May generate puzzles with more than 1 solution.
+  /// More likely with high [_emptySquares]).
   SudokuGenerator([this._emptySquares = 27]) {
     if (_emptySquares < 1 || _emptySquares > 81) {
       throw InvalidEmptySquaresException();
@@ -32,13 +32,19 @@ class SudokuGenerator {
     _fillValues();
   }
 
+  late int _emptySquares;
+  late List<List<int>> _sudoku;
+  late List<List<int>> _sudokuSolved;
+
   /// Unsolved Sudoku with the specified [_emptySquares].
   List<List<int>> get newSudoku => _sudoku;
 
   /// 1 possible solution of the unsolved Sudoku.
   ///
-  /// Use [SudokuUtilities.isSolved()] instead of this to check if a game is solved instead of comparing with this.
-  /// This is to prevent false-negatives when a puzzle has more than one solution.
+  /// Use [SudokuUtilities.isSolved()] instead of this to check if a game is
+  /// solved instead of comparing with this.
+  /// This is to prevent false-negatives when a puzzle has more than
+  /// one solution.
   List<List<int>> get newSudokuSolved => _sudokuSolved;
 
   void _fillValues() {
@@ -49,7 +55,7 @@ class SudokuGenerator {
   }
 
   void _fillDiagonal() {
-    for (var i = 0; i < 9; (i = (i + 3))) {
+    for (var i = 0; i < 9; i = i + 3) {
       _fillBox(i, i);
     }
   }
@@ -78,15 +84,13 @@ class SudokuGenerator {
   }
 
   static int _randomGenerator() {
-    var numberList = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9];
-    numberList.shuffle();
+    var numberList = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9]..shuffle();
     return numberList[0];
   }
 
-  bool _checkIfSafe(int i, int j, int number) {
-    return (_unUsedInRow(i, number) && _unUsedInColumn(j, number)) &&
-        _unUsedInBox(i - (i % 3), j - (j % 3), number);
-  }
+  bool _checkIfSafe(int i, int j, int number) =>
+      (_unUsedInRow(i, number) && _unUsedInColumn(j, number)) &&
+      _unUsedInBox(i - (i % 3), j - (j % 3), number);
 
   bool _unUsedInRow(int i, int number) {
     for (var j = 0; j < 9; j++) {
@@ -108,7 +112,7 @@ class SudokuGenerator {
 
   bool _fillRemaining(int i, int j) {
     if ((j >= 9) && (i < (9 - 1))) {
-      i = (i + 1);
+      i = i + 1;
       j = 0;
     }
     if ((i >= 9) && (j >= 9)) {
@@ -121,11 +125,11 @@ class SudokuGenerator {
     } else {
       if (i < (9 - 3)) {
         if (j == ((i ~/ 3) * 3)) {
-          j = (j + 3);
+          j = j + 3;
         }
       } else {
         if (j == (9 - 3)) {
-          i = (i + 1);
+          i = i + 1;
           j = 0;
           if (i >= 9) {
             return true;

@@ -11,7 +11,7 @@ A Dart library to generate and/or solve Sudoku puzzles.
 
 ```yaml
 dependencies:
-  sudoku_solver_generator: ^1.0.0
+  sudoku_solver_generator: ^1.0.0+2
 ```
 
 A Sudoku Solver usage example:

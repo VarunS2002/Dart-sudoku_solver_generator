@@ -96,11 +96,15 @@ class SudokuUtilities {
   static List<List<int>> to2D(List<int> sudoku) {
     var sudoku2D = List.generate(9, (i) => List.generate(9, (j) => 0));
     var index = 0;
-    for (var i = 0; i < 9; i++) {
-      for (var j = 0; j < 9; j++) {
-        sudoku2D[i][j] = sudoku[index];
-        index++;
+    try {
+      for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+          sudoku2D[i][j] = sudoku[index];
+          index++;
+        }
       }
+    } on RangeError {
+      throw InvalidSudokuConfigurationException();
     }
     if (!isValidConfiguration(sudoku2D)) {
       throw InvalidSudokuConfigurationException();

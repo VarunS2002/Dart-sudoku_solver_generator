@@ -205,7 +205,7 @@ void main() {
 
       test('Invalid Sudoku - Wrong List dimensions (rows)', () {
         var sudoku = <List<int>>[
-          [2, 1, 7, 4, 3, 5, 9, 29, 8],
+          [2, 1, 7, 4, 3, 5, 9, 6, 8],
           [5, 8, 9, 0, 6, 2, 4, 3, 0],
           [3, 4, 6, 0, 7, 9, 2, 5, 1],
           [1, 6, 2, 3, 0, 0, 5, 4, 0],
@@ -219,7 +219,7 @@ void main() {
 
       test('Invalid Sudoku - Wrong List dimensions (columns)', () {
         var sudoku = <List<int>>[
-          [2, 1, 7, 4, 3, 5, 9, 29, 8],
+          [2, 1, 7, 4, 3, 5, 9, 6, 8],
           [5, 8, 9, 0, 6, 2, 4, 3, 0],
           [3, 4, 6, 0, 7, 9, 2, 5, 1],
           [1, 6, 2, 3, 0, 0, 5, 4],

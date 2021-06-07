@@ -97,7 +97,7 @@ void main() {
       });
 
       test('Null safe', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [2, 1, 7, 4, 3, 5, 9, 0, 8],
           [5, 8, 9, 0, 6, 2, 4, 3, 0],
           [3, 4, 6, 0, 7, 9, 2, 5, 1],
@@ -112,7 +112,7 @@ void main() {
       });
 
       test('Already Solved', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [2, 1, 7, 4, 3, 5, 9, 6, 8],
           [5, 8, 9, 1, 6, 2, 4, 3, 7],
           [3, 4, 6, 8, 7, 9, 2, 5, 1],
@@ -127,7 +127,7 @@ void main() {
       });
 
       test('Easy - 27', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [2, 7, 0, 1, 0, 3, 8, 0, 5],
           [0, 0, 9, 2, 0, 8, 3, 0, 7],
           [3, 5, 0, 7, 0, 6, 0, 1, 4],
@@ -142,7 +142,7 @@ void main() {
       });
 
       test('Hard - 54', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [0, 6, 0, 1, 0, 0, 0, 0, 0],
           [0, 8, 0, 0, 0, 0, 0, 0, 1],
           [0, 0, 0, 0, 9, 5, 0, 4, 6],
@@ -157,7 +157,7 @@ void main() {
       });
 
       test('Multiple solutions - 80', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 9, 0, 0, 0, 0],
@@ -174,7 +174,7 @@ void main() {
 
     group('SudokuSolver exception tests', () {
       test('Invalid Sudoku - Repetitive numbers', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [2, 1, 7, 4, 3, 5, 9, 2, 8],
           [5, 8, 9, 0, 6, 2, 4, 3, 0],
           [3, 4, 6, 0, 7, 9, 2, 5, 1],
@@ -189,7 +189,7 @@ void main() {
       });
 
       test('Invalid Sudoku - Wrong numbers', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [2, 1, 7, 4, 3, 5, 9, 29, 8],
           [5, 8, 9, 0, 6, 2, 4, 3, 0],
           [3, 4, 6, 0, 7, 9, 2, 5, 1],
@@ -204,7 +204,7 @@ void main() {
       });
 
       test('Invalid Sudoku - Wrong List dimensions (rows)', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [2, 1, 7, 4, 3, 5, 9, 29, 8],
           [5, 8, 9, 0, 6, 2, 4, 3, 0],
           [3, 4, 6, 0, 7, 9, 2, 5, 1],
@@ -218,7 +218,7 @@ void main() {
       });
 
       test('Invalid Sudoku - Wrong List dimensions (columns)', () {
-        var sudoku = <List<int?>>[
+        var sudoku = <List<int>>[
           [2, 1, 7, 4, 3, 5, 9, 29, 8],
           [5, 8, 9, 0, 6, 2, 4, 3, 0],
           [3, 4, 6, 0, 7, 9, 2, 5, 1],

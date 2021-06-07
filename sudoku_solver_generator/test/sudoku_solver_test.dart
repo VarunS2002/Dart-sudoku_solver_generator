@@ -108,7 +108,8 @@ void main() {
           [0, 9, 4, 7, 2, 3, 8, 1, 5],
           [7, 2, 1, 0, 5, 0, 0, 0, 4],
         ];
-        expect(() => SudokuSolver.solve(sudoku), throwsException);
+        expect(() => SudokuSolver.solve(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
       });
 
       test('Invalid Sudoku - Wrong numbers', () {
@@ -123,7 +124,8 @@ void main() {
           [0, 9, 4, 7, 2, 3, 8, 1, 5],
           [7, 2, 1, 0, 5, 0, 0, 0, 4],
         ];
-        expect(() => SudokuSolver.solve(sudoku), throwsException);
+        expect(() => SudokuSolver.solve(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
       });
 
       test('Invalid Sudoku - Wrong List dimensions (rows)', () {
@@ -137,7 +139,8 @@ void main() {
           [8, 0, 3, 0, 4, 1, 6, 7, 2],
           [0, 9, 4, 7, 2, 3, 8, 1, 5],
         ];
-        expect(() => SudokuSolver.solve(sudoku), throwsException);
+        expect(() => SudokuSolver.solve(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
       });
 
       test('Invalid Sudoku - Wrong List dimensions (columns)', () {
@@ -152,7 +155,8 @@ void main() {
           [0, 9, 4, 7, 2, 3, 8, 1, 5],
           [7, 2, 1, 0, 5, 0, 0, 0, 4],
         ];
-        expect(() => SudokuSolver.solve(sudoku), throwsException);
+        expect(() => SudokuSolver.solve(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
       });
     });
   });

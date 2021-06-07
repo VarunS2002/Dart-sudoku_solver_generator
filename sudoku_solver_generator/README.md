@@ -1,6 +1,6 @@
 # Dart-sudoku_solver_generator
 
-A Dart library to generate and/or solve Sudoku puzzles.
+A Dart library containing tools related to Sudoku puzzles. This includes generating, solving and handling puzzles.
 
 > [![Latest_Release](https://img.shields.io/pub/v/sudoku_solver_generator)](https://pub.dev/packages/sudoku_solver_generator)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
@@ -11,7 +11,7 @@ A Dart library to generate and/or solve Sudoku puzzles.
 
 ```yaml
 dependencies:
-  sudoku_solver_generator: ^1.0.0+2
+  sudoku_solver_generator: ^1.1.0
 ```
 
 A Sudoku Solver usage example:

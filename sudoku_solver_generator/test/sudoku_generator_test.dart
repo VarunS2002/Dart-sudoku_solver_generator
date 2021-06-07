@@ -70,11 +70,13 @@ void main() {
 
     group('SudokuGenerator exception tests', () {
       test('<1 emptySquares', () {
-        expect(() => SudokuGenerator(0), throwsException);
+        expect(() => SudokuGenerator(0),
+            throwsA(const TypeMatcher<InvalidEmptySquaresException>()));
       });
 
       test('>81 emptySquares', () {
-        expect(() => SudokuGenerator(82), throwsException);
+        expect(() => SudokuGenerator(82),
+            throwsA(const TypeMatcher<InvalidEmptySquaresException>()));
       });
     });
   });

@@ -4,21 +4,14 @@ import 'package:test/test.dart';
 void main() {
   group('SudokuGenerator Tests', () {
     group('SudokuGenerator unsolved tests', () {
-      test('Default - 27', () {
-        var generator = SudokuGenerator();
-        expect(
-            SudokuUtilities.isValidConfiguration(generator.newSudoku), isTrue);
-      });
-
       test('Beginner - 18', () {
         var generator = SudokuGenerator(emptySquares: 18);
         expect(
             SudokuUtilities.isValidConfiguration(generator.newSudoku), isTrue);
       });
 
-      test('Easy - 27', () {
-        var generator = SudokuGenerator(
-            emptySquares: 27); // ignore: avoid_redundant_argument_values
+      test('Easy - 27 (default)', () {
+        var generator = SudokuGenerator();
         expect(
             SudokuUtilities.isValidConfiguration(generator.newSudoku), isTrue);
       });
@@ -37,20 +30,14 @@ void main() {
     });
 
     group('SudokuGenerator solved tests', () {
-      test('Default', () {
-        var generator = SudokuGenerator();
-        expect(SudokuUtilities.isSolved(generator.newSudokuSolved), isTrue);
-      });
-
       test('Beginner - 18', () {
         var generator = SudokuGenerator(emptySquares: 18);
         expect(SudokuUtilities.isValidConfiguration(generator.newSudokuSolved),
             isTrue);
       });
 
-      test('Easy - 27', () {
-        var generator = SudokuGenerator(
-            emptySquares: 27); // ignore: avoid_redundant_argument_values
+      test('Easy - 27 (default)', () {
+        var generator = SudokuGenerator();
         expect(SudokuUtilities.isValidConfiguration(generator.newSudokuSolved),
             isTrue);
       });

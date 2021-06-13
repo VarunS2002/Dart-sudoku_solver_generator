@@ -15,11 +15,11 @@ void main() {
   ];
   var sudokuSolved = SudokuSolver.solve(sudoku);
   SudokuUtilities.printSudoku(sudokuSolved);
-  print('');
+  print(''); // ignore: avoid_print
 
   // Generate Example
   var sudokuGenerator = SudokuGenerator(54);
   SudokuUtilities.printSudoku(sudokuGenerator.newSudoku);
-  print('');
+  print(''); // ignore: avoid_print
   SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved);
 }

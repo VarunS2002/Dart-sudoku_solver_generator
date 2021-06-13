@@ -33,3 +33,12 @@ class InvalidEmptySquaresException implements Exception {
   @override
   String toString() => 'InvalidEmptySquaresException';
 }
+
+class UnlikelyUniqueSolutionException implements Exception {
+  /// Returns the error message
+  String errorMessage() => 'The number of empty squares cannot more than 54 if '
+      'a unique solution is needed.';
+
+  @override
+  String toString() => 'UnlikelyUniqueSolutionException';
+}

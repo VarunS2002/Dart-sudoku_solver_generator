@@ -220,4 +220,53 @@ class SudokuUtilities {
     }
     return true;
   }
+
+  ///
+  static bool hasUniqueSolution(List<List<int>> sudoku) {
+    bool legal(List<List<int>> puzzle, int x, int y, int num) {
+      var i = 9;
+      var size = 9;
+      var rowStart = x ~/ 3 * 3;
+      var colStart = y ~/ 3 * 3;
+      for (i = 0; i < size; i++) {
+        if (puzzle[x][i] == num) {
+          return false;
+        }
+        if (puzzle[i][y] == num) {
+          return false;
+        }
+        if (puzzle[rowStart + (i % 3)][colStart + (i ~/ 3)] == num) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    int checkUniqueSolution(List<List<int>> puzzle, int x, int y, int count) {
+      var num = 9;
+      var size = 9;
+      if (x == size) {
+        x = 0;
+        if (++y == size) {
+          return 1 + count;
+        }
+      }
+      if (puzzle[x][y] != 0) {
+        return checkUniqueSolution(puzzle, x + 1, y, count);
+      }
+      for (num = 1; (num <= size) && (count < 2); num++) {
+        if (legal(puzzle, x, y, num)) {
+          puzzle[x][y] = num;
+          count = checkUniqueSolution(puzzle, x + 1, y, count);
+        }
+      }
+      puzzle[x][y] = 0;
+      return count;
+    }
+
+    if (!isValidConfiguration(sudoku)) {
+      throw InvalidSudokuConfigurationException();
+    }
+    return checkUniqueSolution(sudoku, 0, 0, 0) == 1;
+  }
 }

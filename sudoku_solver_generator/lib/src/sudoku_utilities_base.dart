@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:sudoku_solver_generator/src/sudoku_exceptions_base.dart';
 
 /// Provides various functions related to using the Sudoku Solver and Generator
@@ -6,27 +7,50 @@ import 'package:sudoku_solver_generator/src/sudoku_exceptions_base.dart';
 /// Utility class which shouldn't be instantiated.
 class SudokuUtilities {
   /// Prints the [sudoku] in a readable format to standard output.
+  /// Zeroes are represented as `-`.
+  ///
+  /// Printing the [sudoku] can be animated to print the numbers one by one
+  /// by the setting [animated] to `true`.
   ///
   /// [InvalidSudokuConfigurationException] is thrown if the configuration of
   /// the [sudoku] is not valid.
   /// Example Format:
   /// ```
-  /// [7, 6, 4, 1, 2, 3, 8, 5, 9]
-  /// [8, 5, 9, 6, 4, 7, 3, 1, 2]
-  /// [2, 1, 3, 5, 8, 9, 6, 4, 7]
-  /// [5, 2, 6, 4, 3, 1, 9, 7, 8]
-  /// [9, 4, 1, 8, 7, 2, 5, 6, 3]
-  /// [3, 7, 8, 9, 5, 6, 4, 2, 1]
-  /// [1, 9, 7, 3, 6, 4, 2, 8, 5]
-  /// [4, 8, 2, 7, 9, 5, 1, 3, 6]
-  /// [6, 3, 5, 2, 1, 8, 7, 9, 4]
+  /// 9  -  3   1  2  5   -  8  7
+  /// 1  8  -   4  -  6   -  5  -
+  /// 5  -  7   8  9  3   1  4  2
+  ///
+  /// 3  5  4   9  -  2   7  1  8
+  /// 7  -  8   3  -  4   5  2  6
+  /// 6  2  -   5  8  7   9  -  -
+  ///
+  /// 4  1  9   6  5  8   -  7  3
+  /// 2  -  5   7  4  9   8  -  1
+  /// 8  7  -   2  3  1   -  9  5
   /// ```
-  static void printSudoku(List<List<int>> sudoku) {
+  static void printSudoku(List<List<int>> sudoku, {bool animated = false}) {
     if (!isValidConfiguration(sudoku)) {
       throw InvalidSudokuConfigurationException();
     }
-    // ignore: avoid_print
-    sudoku.forEach(print);
+    for (var i = 0; i < 9; i++) {
+      for (var j = 0; j < 9; j++) {
+        if (sudoku[i][j] == 0) {
+          stdout.write(j == 8 ? '-' : '-  ');
+        } else {
+          stdout.write('${sudoku[i][j]}${j == 8 ? '' : '  '}');
+        }
+        if (animated) {
+          sleep(const Duration(milliseconds: 25));
+        }
+        if (((j + 1) % 3 == 0) && !(j == 8)) {
+          stdout.write(' ');
+        }
+      }
+      if ((i + 1) % 3 == 0) {
+        stdout.write('\n');
+      }
+      stdout.write('\n');
+    }
   }
 
   /// Returns an identical copy of the provided [sudoku].

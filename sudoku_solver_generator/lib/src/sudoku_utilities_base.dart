@@ -121,7 +121,7 @@ class SudokuUtilities {
   /// * Every column must have the numbers 1-9 without repetition
   /// * Every 3x3 box must have the number 1-9 without repetition
   /// * Only positions of non-zero and non-null values are considered
-  /// * Solvability of the puzzle is not considered
+  /// * Number of possible solutions of the puzzle is not considered
   static bool isValidConfiguration(List<List<int?>> sudoku) {
     bool notInRow(List<List<int?>> sudoku, int rowNumber) {
       var numberSet = <int>{};
@@ -200,7 +200,8 @@ class SudokuUtilities {
     return true;
   }
 
-  /// Returns `true` if the configuration of the [sudoku] is valid and there are no `0`s/empty squares.
+  /// Returns `true` if the configuration of the [sudoku] is valid and there
+  /// are no `0`s/empty squares.
   ///
   /// Recommended to use this to check if a game is solved instead of comparing
   /// with a solved sudoku.
@@ -221,7 +222,10 @@ class SudokuUtilities {
     return true;
   }
 
+  /// Returns `true` if the [sudoku] has only 1 solution.
   ///
+  /// [InvalidSudokuConfigurationException] is thrown if the configuration of
+  /// the [sudoku] is not valid.
   static bool hasUniqueSolution(List<List<int>> sudoku) {
     bool legal(List<List<int>> puzzle, int x, int y, int num) {
       var i = 9;

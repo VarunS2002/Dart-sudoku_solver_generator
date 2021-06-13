@@ -30,6 +30,7 @@ class SudokuGenerator {
   ///
   /// [UnlikelyUniqueSolutionException] is thrown if [emptySquares] is `> 54`
   /// when [uniqueSolution] is `true`.
+  /// A unique solution is unlikely if there are less than `27` clues.
   SudokuGenerator({int emptySquares = 27, bool uniqueSolution = true}) {
     if (emptySquares < 1) {
       throw InvalidEmptySquaresException();

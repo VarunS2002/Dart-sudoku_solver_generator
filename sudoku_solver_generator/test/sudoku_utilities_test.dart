@@ -464,6 +464,101 @@ void main() {
       });
     });
 
+    group('Check Unique Solution', () {
+      test('Unique solution', () {
+        var sudoku = <List<int>>[
+          [2, 1, 7, 4, 3, 5, 9, 0, 8],
+          [5, 8, 9, 0, 6, 2, 4, 3, 0],
+          [3, 4, 6, 0, 7, 9, 2, 5, 1],
+          [1, 6, 2, 3, 0, 0, 5, 4, 0],
+          [9, 0, 5, 2, 0, 4, 7, 8, 6],
+          [4, 7, 8, 5, 9, 6, 1, 0, 0],
+          [8, 0, 3, 0, 4, 1, 6, 7, 2],
+          [0, 9, 4, 7, 2, 3, 8, 1, 5],
+          [7, 2, 1, 0, 5, 0, 0, 0, 4],
+        ];
+        expect(SudokuUtilities.hasUniqueSolution(sudoku), isTrue);
+      });
+
+      test('Multiple solutions', () {
+        var sudoku = <List<int>>[
+          [0, 0, 1, 0, 0, 3, 6, 0, 0],
+          [0, 3, 8, 0, 0, 0, 0, 2, 5],
+          [5, 2, 4, 0, 6, 0, 1, 0, 3],
+          [0, 8, 0, 6, 0, 2, 0, 0, 0],
+          [1, 0, 0, 0, 0, 5, 0, 0, 9],
+          [4, 0, 0, 0, 0, 9, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 6, 0, 3, 0],
+          [8, 0, 0, 0, 2, 0, 4, 0, 1],
+        ];
+        expect(SudokuUtilities.hasUniqueSolution(sudoku), isFalse);
+      });
+
+      test('Invalid Repetitive numbers', () {
+        var sudoku = <List<int>>[
+          [2, 1, 7, 4, 3, 5, 9, 2, 8],
+          [5, 8, 9, 0, 6, 2, 4, 3, 0],
+          [3, 4, 6, 0, 7, 9, 2, 5, 1],
+          [1, 6, 2, 3, 0, 0, 5, 4, 0],
+          [9, 0, 5, 2, 0, 4, 7, 8, 6],
+          [4, 7, 8, 5, 9, 6, 1, 0, 0],
+          [8, 0, 3, 0, 4, 1, 6, 7, 2],
+          [0, 9, 4, 7, 2, 3, 8, 1, 5],
+          [7, 2, 1, 0, 5, 0, 0, 0, 4],
+        ];
+        expect(() => SudokuUtilities.hasUniqueSolution(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
+      });
+
+      test('Invalid Wrong numbers', () {
+        var sudoku = <List<int>>[
+          [2, 1, 7, 4, 3, 5, 9, 29, 8],
+          [5, 8, 9, 0, 6, 2, 4, 3, 0],
+          [3, 4, 6, 0, 7, 9, 2, 5, 1],
+          [1, 6, 2, 3, 0, 0, 5, 4, 0],
+          [9, 0, 5, 2, 0, 4, 7, 8, 6],
+          [4, 7, 8, 5, 9, 6, 1, 0, 0],
+          [8, 0, 3, 0, 4, 1, 6, 7, 2],
+          [0, 9, 4, 7, 2, 3, 8, 1, 5],
+          [7, 2, 1, 0, 5, 0, 0, 0, 4],
+        ];
+        expect(() => SudokuUtilities.hasUniqueSolution(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
+      });
+
+      test('Invalid Wrong List dimensions (rows)', () {
+        var sudoku = <List<int>>[
+          [2, 1, 7, 4, 3, 5, 9, 6, 8],
+          [5, 8, 9, 0, 6, 2, 4, 3, 0],
+          [3, 4, 6, 0, 7, 9, 2, 5, 1],
+          [1, 6, 2, 3, 0, 0, 5, 4, 0],
+          [9, 0, 5, 2, 0, 4, 7, 8, 6],
+          [4, 7, 8, 5, 9, 6, 1, 0, 0],
+          [8, 0, 3, 0, 4, 1, 6, 7, 2],
+          [0, 9, 4, 7, 2, 3, 8, 1, 5],
+        ];
+        expect(() => SudokuUtilities.hasUniqueSolution(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
+      });
+
+      test('Invalid Wrong List dimensions (columns)', () {
+        var sudoku = <List<int>>[
+          [2, 1, 7, 4, 3, 5, 9, 6, 8],
+          [5, 8, 9, 0, 6, 2, 4, 3, 0],
+          [3, 4, 6, 0, 7, 9, 2, 5, 1],
+          [1, 6, 2, 3, 0, 0, 5, 4],
+          [9, 0, 5, 2, 0, 4, 7, 8, 6],
+          [4, 7, 8, 5, 9, 6, 1, 0, 0],
+          [8, 0, 3, 0, 4, 1, 6, 7, 2],
+          [0, 9, 4, 7, 2, 3, 8, 1, 5],
+          [7, 2, 1, 0, 5, 0, 0, 0, 4],
+        ];
+        expect(() => SudokuUtilities.hasUniqueSolution(sudoku),
+            throwsA(const TypeMatcher<InvalidSudokuConfigurationException>()));
+      });
+    });
+
     group('2D to 1D', () {
       test('Valid', () {
         var sudoku = <List<int>>[

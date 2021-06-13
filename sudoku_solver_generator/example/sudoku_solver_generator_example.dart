@@ -18,7 +18,7 @@ void main() {
   print(''); // ignore: avoid_print
 
   // Generate Example
-  var sudokuGenerator = SudokuGenerator(54);
+  var sudokuGenerator = SudokuGenerator(emptySquares: 54);
   SudokuUtilities.printSudoku(sudokuGenerator.newSudoku);
   print(''); // ignore: avoid_print
   SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved);

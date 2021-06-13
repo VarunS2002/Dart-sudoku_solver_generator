@@ -8,10 +8,10 @@ class SudokuGenerator {
   /// Constructor to generate the Sudoku. Use the getter methods to retrieve
   /// the puzzle.
   ///
-  /// [_emptySquares] specifies how many boxes should be left empty in the
-  /// unsolved puzzle. Clues will be 81-[_emptySquares].
-  /// Defaults to 27.
-  /// Higher difficulty is indicated by more [_emptySquares].
+  /// [emptySquares] specifies how many boxes should be left empty in the
+  /// unsolved puzzle. Clues will be 81-[emptySquares].
+  /// Defaults to `27`.
+  /// Higher difficulty is indicated by more [emptySquares].
   ///
   /// Suggested values for various difficulty levels:
   /// * Beginner - 18
@@ -19,32 +19,51 @@ class SudokuGenerator {
   /// * Medium - 36
   /// * Hard - 54
   ///
-  /// [InvalidEmptySquaresException] is thrown if the value of [_emptySquares]
+  /// [uniqueSolution] specifies if the required Sudoku must have
+  /// only 1 solution.
+  /// Defaults to `true`.
+  ///
+  ///
+  /// [InvalidEmptySquaresException] is thrown if the value of [emptySquares]
   /// is invalid.
   /// Valid values: Any integer from 1-81 (inclusive).
-  /// (Known Issue - May generate puzzles with more than 1 solution.
-  /// More likely with high [_emptySquares]).
-  SudokuGenerator([this._emptySquares = 27]) {
-    if (_emptySquares < 1 || _emptySquares > 81) {
+  ///
+  /// [UnlikelyUniqueSolutionException] is thrown if [emptySquares] is `> 54`
+  /// when [uniqueSolution] is `true`.
+  SudokuGenerator({int emptySquares = 27, bool uniqueSolution = true}) {
+    if (emptySquares < 1) {
       throw InvalidEmptySquaresException();
     }
+    if (uniqueSolution) {
+      if (emptySquares > 54) {
+        throw UnlikelyUniqueSolutionException();
+      }
+    } else {
+      if (emptySquares > 81) {
+        throw InvalidEmptySquaresException();
+      }
+    }
+    _uniqueSolution = uniqueSolution;
+    _emptySquares = emptySquares;
     _sudoku = List.generate(9, (i) => List.generate(9, (j) => 0));
     _fillValues();
   }
 
+  late bool _uniqueSolution;
   late int _emptySquares;
   late List<List<int>> _sudoku;
   late List<List<int>> _sudokuSolved;
 
-  /// Unsolved Sudoku with the specified [_emptySquares].
+  /// Unsolved Sudoku with the specified [emptySquares].
   List<List<int>> get newSudoku => _sudoku;
 
-  /// 1 possible solution of the unsolved Sudoku.
+  /// 1 possible solution of the unsolved Sudoku if [uniqueSolution] is `false`
+  /// else the only solution.
   ///
-  /// Use [SudokuUtilities.isSolved()] instead of this to check if a game is
-  /// solved instead of comparing with this.
-  /// This is to prevent false-negatives when a puzzle has more than
-  /// one solution.
+  /// When [uniqueSolution] is `false` use [SudokuUtilities.isSolved()] to
+  /// check if a game is solved instead of comparing with this.
+  /// This is to prevent false-negatives when a puzzle has been solved
+  /// correctly but the solution is not identical to this one.
   List<List<int>> get newSudokuSolved => _sudokuSolved;
 
   void _fillValues() {
@@ -157,8 +176,18 @@ class SudokuGenerator {
         row = _randomGenerator() - 1;
         column = _randomGenerator() - 1;
       }
-      _sudoku[row][column] = 0;
-      _emptySquares--;
+      if (_uniqueSolution) {
+        var backup = _sudoku[row][column];
+        _sudoku[row][column] = 0;
+        if (SudokuUtilities.hasUniqueSolution(_sudoku)) {
+          _emptySquares--;
+        } else {
+          _sudoku[row][column] = backup;
+        }
+      } else {
+        _sudoku[row][column] = 0;
+        _emptySquares--;
+      }
     }
   }
 }

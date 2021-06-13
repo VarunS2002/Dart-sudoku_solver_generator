@@ -6,8 +6,11 @@ import 'package:sudoku_solver_generator/src/sudoku_utilities_base.dart';
 class SudokuSolver {
   /// Solves the provided [sudoku] and returns the solved puzzle.
   ///
+  /// Might return different solutions everytime if the puzzle has more than
+  /// one solution.
   /// The [sudoku] must be a [List] of 9 [List]s of 9 [int]s and empty squares
   /// should be represented by `null` or `0`.
+  ///
   /// [InvalidSudokuConfigurationException] is thrown if the configuration of
   /// the [sudoku] is not valid.
   static List<List<int>> solve(List<List<int?>> sudoku) {

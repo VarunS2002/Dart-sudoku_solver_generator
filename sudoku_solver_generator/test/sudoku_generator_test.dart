@@ -11,26 +11,26 @@ void main() {
       });
 
       test('Beginner - 18', () {
-        var generator = SudokuGenerator(18);
+        var generator = SudokuGenerator(emptySquares: 18);
         expect(
             SudokuUtilities.isValidConfiguration(generator.newSudoku), isTrue);
       });
 
       test('Easy - 27', () {
-        var generator =
-            SudokuGenerator(27); // ignore: avoid_redundant_argument_values
+        var generator = SudokuGenerator(
+            emptySquares: 27); // ignore: avoid_redundant_argument_values
         expect(
             SudokuUtilities.isValidConfiguration(generator.newSudoku), isTrue);
       });
 
       test('Medium - 36', () {
-        var generator = SudokuGenerator(36);
+        var generator = SudokuGenerator(emptySquares: 36);
         expect(
             SudokuUtilities.isValidConfiguration(generator.newSudoku), isTrue);
       });
 
       test('Hard - 54', () {
-        var generator = SudokuGenerator(54);
+        var generator = SudokuGenerator(emptySquares: 54);
         expect(
             SudokuUtilities.isValidConfiguration(generator.newSudoku), isTrue);
       });
@@ -43,26 +43,26 @@ void main() {
       });
 
       test('Beginner - 18', () {
-        var generator = SudokuGenerator(18);
+        var generator = SudokuGenerator(emptySquares: 18);
         expect(SudokuUtilities.isValidConfiguration(generator.newSudokuSolved),
             isTrue);
       });
 
       test('Easy - 27', () {
-        var generator =
-            SudokuGenerator(27); // ignore: avoid_redundant_argument_values
+        var generator = SudokuGenerator(
+            emptySquares: 27); // ignore: avoid_redundant_argument_values
         expect(SudokuUtilities.isValidConfiguration(generator.newSudokuSolved),
             isTrue);
       });
 
       test('Medium - 36', () {
-        var generator = SudokuGenerator(36);
+        var generator = SudokuGenerator(emptySquares: 36);
         expect(SudokuUtilities.isValidConfiguration(generator.newSudokuSolved),
             isTrue);
       });
 
       test('Hard - 54', () {
-        var generator = SudokuGenerator(54);
+        var generator = SudokuGenerator(emptySquares: 54);
         expect(SudokuUtilities.isValidConfiguration(generator.newSudokuSolved),
             isTrue);
       });
@@ -70,13 +70,12 @@ void main() {
 
     group('SudokuGenerator exception tests', () {
       test('<1 emptySquares', () {
-        expect(() => SudokuGenerator(0),
+        expect(() => SudokuGenerator(emptySquares: 0),
             throwsA(const TypeMatcher<InvalidEmptySquaresException>()));
       });
 
       test('>81 emptySquares', () {
-        expect(() => SudokuGenerator(82),
-            throwsA(const TypeMatcher<InvalidEmptySquaresException>()));
+        expect(() => SudokuGenerator(emptySquares: 82), throwsException);
       });
     });
   });

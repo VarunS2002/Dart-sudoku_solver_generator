@@ -35,9 +35,10 @@ class InvalidEmptySquaresException implements Exception {
 }
 
 /// Thrown when the value of the [emptySquares] parameter of [SudokuGenerator]
-/// is `> 54` when [uniqueSolution] parameter of [SudokuGenerator] is `true`.
+/// is `> 54` and [uniqueSolution] is set to `true`.
 ///
-/// A unique solution is unlikely if there are less than `27` clues.
+/// This is because a unique solution is unlikely if there are less than
+/// `27` clues.
 class UnlikelyUniqueSolutionException implements Exception {
   /// Returns the error message
   String errorMessage() => 'The number of empty squares cannot more than 54 if '

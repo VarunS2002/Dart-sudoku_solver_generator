@@ -1,3 +1,26 @@
+## 2.0.0 - [14-06-2021]
+
+- **BREAKING CHANGE**
+    - If you manually specified `emptySquares` for `SudokuGenerator()` then it will break as it is a named parameter now
+    - If the manually specified `emptySquares` is more than 54 then it will break as it cannot generate a unique
+      solution and will throw a `UnlikelyUniqueSolutionException`
+    - Fix: `SudokuGenerator(emptySquares: 54)` instead of `SudokuGenerator(54)`
+    - Fix: `SudokuGenerator(emptySquares: 60, uniqueSolution: false)` if `emptySquares` is more than 54
+
+- Added the bool parameter `uniqueSolution` to `SudokuGenerator()` to specify if a puzzle should have a unique solution
+    - Defaults to `true`
+    - `UnlikelyUniqueSolutionException` is thrown if `emptySquares` is `> 54`
+    - This is because a unique solution is unlikely if there are less than `27` clues
+    - Fixes the known issue
+
+- Added function `SudokuUtilities.hasUniqueSolution()` to check if a puzzle has a unique solution
+
+- Improved function `SudokuUtilities.printSudoku()`
+    - Improved the aesthetics of the output by adding spaces and new lines and removing commas and brackets
+    - Added a bool parameter `animated` to animate it by printing the numbers one by one
+
+- Improved documentation
+
 ## 1.1.0 - [08-06-2021]
 
 - Improved checking if the Sudoku configuration is valid

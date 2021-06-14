@@ -6,6 +6,17 @@
 
 - Fixed RangeError in `SudokuUtilities.to2D()` if Sudoku dimensions aren't valid
 
+## 1.0.0+2 - [06-06-2021]
+
+- Updated Documentation
+    - Description in `pubspec.yaml`
+
+## 1.0.0+1 - [06-06-2021]
+
+- Updated Documentation
+    - Description in `README.md`
+    - Usage in `README.md`
+
 ## 1.0.0 - [06-06-2021]
 
 - First Release

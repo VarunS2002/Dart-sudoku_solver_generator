@@ -21,5 +21,5 @@ void main() {
   var sudokuGenerator = SudokuGenerator(emptySquares: 54);
   SudokuUtilities.printSudoku(sudokuGenerator.newSudoku);
   print(''); // ignore: avoid_print
-  SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved, animated: true);
+  SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved);
 }

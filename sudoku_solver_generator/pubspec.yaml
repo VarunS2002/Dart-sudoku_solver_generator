@@ -1,6 +1,6 @@
 name: sudoku_solver_generator
 description: A Dart library containing tools related to Sudoku puzzles. This includes generating, solving and handling puzzles.
-version: 2.0.0
+version: 2.1.0
 homepage: https://github.com/VarunS2002/Dart-sudoku_solver_generator
 
 environment:

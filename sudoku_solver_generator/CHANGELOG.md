@@ -1,3 +1,11 @@
+## 2.1.0 - [17-06-2021]
+
+- **BREAKING CHANGE**
+    - Bool parameter `animated` has been removed from `SudokuUtilities.printSudoku()`
+    - This is because this breaks support for exporting to web (dart2js)
+
+- Added back support for dart2js
+
 ## 2.0.0 - [14-06-2021]
 
 - **BREAKING CHANGE**

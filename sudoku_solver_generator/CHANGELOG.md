@@ -1,3 +1,8 @@
+## 2.1.0+1 - [17-06-2021]
+
+- Updated Documentation
+    - Fixed usage example in `README.md`
+
 ## 2.1.0 - [17-06-2021]
 
 - **BREAKING CHANGE**

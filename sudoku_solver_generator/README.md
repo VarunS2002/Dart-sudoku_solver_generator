@@ -45,7 +45,7 @@ main() {
   var sudokuGenerator = SudokuGenerator(emptySquares: 54);
   SudokuUtilities.printSudoku(sudokuGenerator.newSudoku);
   print('');
-  SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved, animated: true);
+  SudokuUtilities.printSudoku(sudokuGenerator.newSudokuSolved);
 }
 ```
 
